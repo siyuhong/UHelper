@@ -9,8 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 
      Init();
 
-     //test ssh
-
+     //test qtcreator
 }
 
 
