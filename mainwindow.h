@@ -11,6 +11,7 @@
 #include <QTimer>
 #include <QString>
 #include <QMetaEnum>
+#include <QLabel>
 
 #define DISPLAYMODE_ASCII 0
 #define DISPLAYMODE_HEX 1
@@ -50,6 +51,8 @@ private:
     QButtonGroup* mBGdisplaymode;
     QButtonGroup* mBGsendoutmode;
     QTimer *mAutosendoutTimer;
+    QLabel *mlaybeNewsname;
+    QLabel *mlaybelNews;
     enum state { s_connect, s_disconnect} uart_state;
 
 private slots:

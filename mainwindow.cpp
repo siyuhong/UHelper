@@ -8,10 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
      ui->setupUi(this);
 
      Init();
-
-     //test qtcreator
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -53,6 +50,12 @@ void MainWindow::Init_UI(){
 
     //仅能输入大于0的数字
     ui->lineEdit_AutoResend->setValidator(new QIntValidator(0, INT_MAX, this));
+
+    mlaybeNewsname = new QLabel;
+    mlaybeNewsname->setText("News:");
+    statusBar()->addWidget(mlaybeNewsname);
+    mlaybelNews = new QLabel;
+    statusBar()->addWidget(mlaybelNews);
 
     ui->comBox_uartDataLen->setCurrentIndex(3);
     ui->comBox_uartDps->setCurrentIndex(7);
@@ -110,7 +113,7 @@ void MainWindow::on_pushButton_uartDisconnect_clicked()
         mSerial->close();
         Init();
         setNewsColor(Qt::black);
-        ui->label_news->setText("SerialPort Close Success!");
+        mlaybelNews->setText("SerialPort Close Success!");
     }
 }
 
@@ -164,12 +167,12 @@ void MainWindow::on_pushButton_uartConnect_clicked()
         connect(mSerial,SIGNAL(errorOccurred(QSerialPort::SerialPortError)),
                 this,SLOT(slot_uartError(QSerialPort::SerialPortError)));
         setNewsColor(Qt::black);
-        ui->label_news->setText("SerialPort Open Success!");
+        mlaybelNews->setText("SerialPort Open Success!");
     }
     else{
         uart_state = s_disconnect;
         setNewsColor(Qt::red);
-        ui->label_news->setText("SerialPort Open Fail!");
+        mlaybelNews->setText("SerialPort Open Fail!");
     }
 }
 
@@ -181,7 +184,7 @@ void MainWindow::on_buttom_sendout_clicked()
 {
     if(uart_state != s_connect){
         setNewsColor(Qt::red);
-        ui->label_news->setText("SerialPort is't Connect.");
+        mlaybelNews->setText("SerialPort is't Connect.");
         return;
     }
 
@@ -233,7 +236,7 @@ void MainWindow::slot_uartReadData(){
         ui->textBrowser_intput->insertPlainText(QString::fromLocal8Bit(mSerial->readAll()));
 
     }
-    // This Error！！！
+
     else if(DISPLAYMODE_HEX == mBGdisplaymode->checkedId()){
 
         QString re = "";
@@ -262,7 +265,7 @@ void MainWindow::slot_uartReadData(){
 void MainWindow::slot_uartError(QSerialPort::SerialPortError error){
 
     QMetaEnum metaError = QMetaEnum::fromType<QSerialPort::SerialPortError>();
-    ui->label_news->setText(metaError.valueToKey(error));
+    mlaybelNews->setText(metaError.valueToKey(error));
     setNewsColor(Qt::red);
 }
 
@@ -280,7 +283,7 @@ void MainWindow::on_checkBox_sendoutAutoResend_clicked(bool checked)
         }
         else{
             setNewsColor(Qt::red);
-            ui->label_news->setText("SerialPort is't Connect.");
+            mlaybelNews->setText("SerialPort is't Connect.");
             return;
         }
     }
@@ -314,7 +317,7 @@ void MainWindow::on_lineEdit_AutoResend_textChanged(const QString &arg1)
 void MainWindow::setNewsColor(Qt::GlobalColor color){
     QPalette pa;
     pa.setColor(QPalette::WindowText,color);
-    ui->label_news->setPalette(pa);
+    mlaybelNews->setPalette(pa);
 }
 
 void MainWindow::on_pushButton_clear_TBinput_clicked()
@@ -343,11 +346,11 @@ void MainWindow::on_comBox_uartDps_currentTextChanged(const QString &arg1)
 
         if(mSerial->setBaudRate(mBaudRate)){
             setNewsColor(Qt::black);
-            ui->label_news->setText("SerialPort setBaudRate is OK.");
+            mlaybelNews->setText("SerialPort setBaudRate is OK.");
         }
         else{
             setNewsColor(Qt::red);
-            ui->label_news->setText("SerialPort setBaudRate is Error.");
+            mlaybelNews->setText("SerialPort setBaudRate is Error.");
         }
     }
 
@@ -361,11 +364,11 @@ void MainWindow::on_comBox_uartDataLen_currentIndexChanged(const QString &arg1)
 
         if(mSerial->setDataBits(mDataBits)){
             setNewsColor(Qt::black);
-            ui->label_news->setText("SerialPort setDataBits is OK.");
+            mlaybelNews->setText("SerialPort setDataBits is OK.");
         }
         else{
             setNewsColor(Qt::red);
-            ui->label_news->setText("SerialPort setDataBits is Error.");
+            mlaybelNews->setText("SerialPort setDataBits is Error.");
         }
     }
 }
@@ -385,11 +388,11 @@ void MainWindow::on_comBox_uartCheckBit_currentIndexChanged(int index)
 
         if(mSerial->setParity(mParity)){
             setNewsColor(Qt::black);
-            ui->label_news->setText("SerialPort setParity is OK.");
+            mlaybelNews->setText("SerialPort setParity is OK.");
         }
         else{
             setNewsColor(Qt::red);
-            ui->label_news->setText("SerialPort setParity is Error.");
+            mlaybelNews->setText("SerialPort setParity is Error.");
         }
     }
 }
@@ -405,11 +408,11 @@ void MainWindow::on_comBox_uartFlowControl_currentIndexChanged(int index)
 
         if(mSerial->setFlowControl(mFlowControl)){
             setNewsColor(Qt::black);
-            ui->label_news->setText("SerialPort setFlowControl is OK.");
+            mlaybelNews->setText("SerialPort setFlowControl is OK.");
         }
         else{
             setNewsColor(Qt::red);
-            ui->label_news->setText("SerialPort setFlowControl is Error.");
+            mlaybelNews->setText("SerialPort setFlowControl is Error.");
         }
     }
 }
@@ -423,11 +426,11 @@ void MainWindow::on_comBox_uartStopBit_currentIndexChanged(int index)
 
         if(mSerial->setStopBits(mStopBits)){
             setNewsColor(Qt::black);
-            ui->label_news->setText("SerialPort setStopBits is OK.");
+            mlaybelNews->setText("SerialPort setStopBits is OK.");
         }
         else{
             setNewsColor(Qt::red);
-            ui->label_news->setText("SerialPort setStopBits is Error.");
+            mlaybelNews->setText("SerialPort setStopBits is Error.");
         }
     }
 }
