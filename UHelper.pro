@@ -3,7 +3,18 @@ QT       += serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+# 版本信息
+VERSION = 1.0.0.0
+# 图标
 RC_ICONS = ico_UHelper.ico
+# 产品名称
+QMAKE_TARGET_PRODUCT = "UHelper"
+# 文件说明
+QMAKE_TARGET_DESCRIPTION = "UHelper"
+# 版权信息
+QMAKE_TARGET_COPYRIGHT = "Apache License 2.0"
+# 中文（简体）
+RC_LANG = 0x0004
 
 CONFIG += c++11
 
