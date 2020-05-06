@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ico_UHelper.ico</file>
+    </qresource>
+</RCC>

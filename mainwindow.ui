@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/ico_UHelper.ico</normaloff>:/ico_UHelper.ico</iconset>
+  </property>
   <widget class="QWidget" name="UHelperwidget">
    <property name="minimumSize">
     <size>
@@ -455,6 +459,8 @@
    <header>mycombobox.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>
