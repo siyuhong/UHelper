@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
      ui->setupUi(this);
 
      Init();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -70,10 +72,48 @@ void MainWindow::Init_UI(){
 
     ui->checkBox_displayNewline->setChecked(true);
 
+    connect(ui->menu_file,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_file(QAction*)));
+    connect(ui->menu_tools,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_tools(QAction*)));
+//    connect(ui->menu_setting,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_setting(QAction*)));
+    connect(ui->menu_setStyle,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_setting(QAction*)));
+    connect(ui->menu_help,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_help(QAction*)));;
+
+    //set action Shortcut
+    ui->action_ASCII->setShortcut(tr("Ctrl+A"));
+    ui->action_baseConversion->setShortcut(tr("Ctrl+B"));
+    ui->action_saveRecnews->setShortcut(tr("Ctrl+S"));
+
     Init_UartPort();
-//    Init_UartDps();
 
 }
+
+void MainWindow::slot_menu_file(QAction *select){
+    if(select == ui->action_savePreferences){}
+    else if(select == ui->action_saveRecnews){}
+    else if(select == ui->action_setPreferences){}
+}
+void MainWindow::slot_menu_tools(QAction *select){}
+
+void MainWindow::slot_menu_setting(QAction *select){
+    //Radio
+    if(select == ui->action_styleDefault){
+        ui->action_styleDefault->setChecked(true);
+        ui->action_styleDark->setChecked(false);
+        ui->action_styleCustom->setChecked(false);
+    }
+    if(select == ui->action_styleDark){
+        ui->action_styleDefault->setChecked(false);
+        ui->action_styleDark->setChecked(true);
+        ui->action_styleCustom->setChecked(false);
+    }
+    if(select == ui->action_styleCustom){
+        ui->action_styleDefault->setChecked(false);
+        ui->action_styleDark->setChecked(false);
+        ui->action_styleCustom->setChecked(true);
+    }
+}
+
+void MainWindow::slot_menu_help(QAction *select){}
 
 /**
  * @brief MainWindow::Init

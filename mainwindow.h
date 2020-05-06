@@ -59,6 +59,12 @@ private slots:
     void on_comBox_uartPort_clicked();
     void slot_uartReadData();
     void slot_Timeout_Uartsendout();
+
+    void slot_menu_file(QAction* select);
+    void slot_menu_tools(QAction* select);
+    void slot_menu_setting(QAction* select);
+    void slot_menu_help(QAction* select);
+
     void slot_uartError(QSerialPort::SerialPortError error);
     void on_checkBox_sendoutAutoResend_clicked(bool checked);
     void on_lineEdit_AutoResend_textChanged(const QString &arg1);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>736</width>
-    <height>563</height>
+    <width>761</width>
+    <height>558</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -37,38 +37,6 @@
     </size>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="2" column="1" colspan="2">
-     <widget class="QPlainTextEdit" name="textEdit_output">
-      <property name="maximumSize">
-       <size>
-        <width>1952222</width>
-        <height>80</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1" colspan="3">
-     <widget class="QTextBrowser" name="textBrowser_intput"/>
-    </item>
-    <item row="2" column="3">
-     <widget class="QPushButton" name="buttom_sendout">
-      <property name="minimumSize">
-       <size>
-        <width>35</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>发送</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0" rowspan="4">
      <widget class="QWidget" name="widget_3" native="true">
       <property name="sizePolicy">
@@ -390,6 +358,38 @@
       </layout>
      </widget>
     </item>
+    <item row="2" column="1" colspan="2">
+     <widget class="QPlainTextEdit" name="textEdit_output">
+      <property name="maximumSize">
+       <size>
+        <width>1952222</width>
+        <height>80</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3">
+     <widget class="QPushButton" name="buttom_sendout">
+      <property name="minimumSize">
+       <size>
+        <width>35</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>发送</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="3">
+     <widget class="QTextBrowser" name="textBrowser_intput"/>
+    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -398,47 +398,67 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>736</width>
+     <width>761</width>
      <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="menu_file">
     <property name="title">
      <string>文件</string>
     </property>
-    <addaction name="action_2"/>
-    <addaction name="action_3"/>
-    <addaction name="action"/>
+    <addaction name="action_saveRecnews"/>
+    <addaction name="action_savePreferences"/>
+    <addaction name="action_setPreferences"/>
    </widget>
-   <widget class="QMenu" name="menu_2">
+   <widget class="QMenu" name="menu_tools">
     <property name="title">
      <string>工具</string>
     </property>
     <addaction name="action_ASCII"/>
-    <addaction name="action_ASCII_2"/>
+    <addaction name="action_baseConversion"/>
    </widget>
-   <widget class="QMenu" name="menu_3">
+   <widget class="QMenu" name="menu_help">
     <property name="title">
-     <string>关于</string>
+     <string>帮助</string>
     </property>
+    <addaction name="action_pushbug"/>
+    <addaction name="separator"/>
+    <addaction name="action_aboutAuthor"/>
+    <addaction name="action_aboutUHelper"/>
    </widget>
-   <addaction name="menu"/>
-   <addaction name="menu_2"/>
-   <addaction name="menu_3"/>
+   <widget class="QMenu" name="menu_setting">
+    <property name="title">
+     <string>设置</string>
+    </property>
+    <widget class="QMenu" name="menu_setStyle">
+     <property name="title">
+      <string>界面风格</string>
+     </property>
+     <addaction name="action_styleDefault"/>
+     <addaction name="action_styleDark"/>
+     <addaction name="action_styleCustom"/>
+    </widget>
+    <addaction name="menu_setStyle"/>
+    <addaction name="action_setFont"/>
+   </widget>
+   <addaction name="menu_file"/>
+   <addaction name="menu_tools"/>
+   <addaction name="menu_setting"/>
+   <addaction name="menu_help"/>
   </widget>
-  <action name="action_2">
+  <action name="action_saveRecnews">
    <property name="text">
     <string>保存消息</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="action_savePreferences">
    <property name="text">
-    <string>保存配置</string>
+    <string>保存偏好</string>
    </property>
   </action>
-  <action name="action">
+  <action name="action_setPreferences">
    <property name="text">
-    <string>选择默认配置</string>
+    <string>选择默认偏好</string>
    </property>
   </action>
   <action name="action_ASCII">
@@ -446,9 +466,59 @@
     <string>ASCII</string>
    </property>
   </action>
-  <action name="action_ASCII_2">
+  <action name="action_baseConversion">
    <property name="text">
     <string>进制转换</string>
+   </property>
+  </action>
+  <action name="action_aboutUHelper">
+   <property name="text">
+    <string>关于UHelper</string>
+   </property>
+  </action>
+  <action name="action_aboutAuthor">
+   <property name="text">
+    <string>关于作者</string>
+   </property>
+  </action>
+  <action name="action_pushbug">
+   <property name="text">
+    <string>bug反馈</string>
+   </property>
+  </action>
+  <action name="action_setFont">
+   <property name="text">
+    <string>字体</string>
+   </property>
+  </action>
+  <action name="action_styleDefault">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>默认风格</string>
+   </property>
+  </action>
+  <action name="action_styleDark">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>暗黑模式</string>
+   </property>
+  </action>
+  <action name="action_styleCustom">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>自定义风格</string>
    </property>
   </action>
  </widget>
@@ -459,6 +529,28 @@
    <header>mycombobox.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>comBox_uartDps</tabstop>
+  <tabstop>comBox_uartPort</tabstop>
+  <tabstop>comBox_uartDataLen</tabstop>
+  <tabstop>comBox_uartCheckBit</tabstop>
+  <tabstop>comBox_uartStopBit</tabstop>
+  <tabstop>comBox_uartFlowControl</tabstop>
+  <tabstop>radioButton_displayASCII</tabstop>
+  <tabstop>radioButton_displayHEX</tabstop>
+  <tabstop>checkBox_displayNewline</tabstop>
+  <tabstop>checkBox_displayTime</tabstop>
+  <tabstop>radioButton_sendoutASCII</tabstop>
+  <tabstop>radioButton_sendoutHEX</tabstop>
+  <tabstop>checkBox_sendoutAutoResend</tabstop>
+  <tabstop>lineEdit_AutoResend</tabstop>
+  <tabstop>pushButton_uartConnect</tabstop>
+  <tabstop>textEdit_output</tabstop>
+  <tabstop>pushButton_clear_TBinput</tabstop>
+  <tabstop>pushButton_uartDisconnect</tabstop>
+  <tabstop>pushButton_clear_TBoutput</tabstop>
+  <tabstop>textBrowser_intput</tabstop>
+ </tabstops>
  <resources>
   <include location="res.qrc"/>
  </resources>
