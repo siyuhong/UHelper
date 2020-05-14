@@ -9,12 +9,71 @@ MainWindow::MainWindow(QWidget *parent)
 
      Init();
 
+     readSettings();
 
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
     delete ui;
+}
+
+void MainWindow::writeSettings(){
+
+    QSettings settings("FSF","UHelper");
+
+    // 主窗体位置及大小
+    settings.beginGroup("MainWindows");
+    settings.setValue("size",size());
+    settings.setValue("pos",pos());
+    settings.endGroup();
+
+    // 接收设置
+    settings.beginGroup("DisplaySettings");
+    settings.setValue("displayMode",mBGdisplaymode->checkedId());
+    settings.setValue("displayNewline",ui->checkBox_displayNewline->isChecked());
+    settings.setValue("displayTime",ui->checkBox_displayTime->isChecked());
+    settings.endGroup();
+
+    // 发送设置
+    settings.beginGroup("SendoutSettings");
+    settings.setValue("sendoutMode",mBGsendoutmode->checkedId());
+    settings.setValue("sendoutAutoResend",mBGsendoutmode->checkedId());
+    settings.setValue("sendoutAutoResendTime",ui->lineEdit_AutoResend->text());
+    settings.endGroup();
+}
+
+void MainWindow::readSettings(){
+
+    QSettings settings("FSF","UHelper");
+
+    settings.beginGroup("MainWindows");
+    resize(settings.value("size",QSize(400,400)).toSize());
+    move(settings.value("pos",QPoint(200,200)).toPoint());
+    settings.endGroup();
+
+    settings.beginGroup("DisplaySettings");
+    if(DISPLAYMODE_ASCII == settings.value("displayMode",DISPLAYMODE_ASCII).toInt()){
+        ui->radioButton_displayASCII->setChecked(true);
+    }else{
+        ui->radioButton_displayHEX->setChecked(true);
+    }
+    ui->checkBox_displayNewline->setChecked(
+                settings.value("displayNewline",true).toBool());
+    ui->checkBox_displayTime->setChecked(
+                settings.value("displayTime",false).toBool());
+    settings.endGroup();
+
+    settings.beginGroup("SendoutSettings");
+    if(SENDOUTMODE_ASCII == settings.value("sendoutMode",SENDOUTMODE_ASCII).toInt()){
+        ui->radioButton_sendoutASCII->setChecked(true);
+    }else{
+        ui->radioButton_sendoutHEX->setChecked(true);
+    }
+    ui->checkBox_sendoutAutoResend->setChecked(
+                settings.value("sendoutAutoResend",false).toBool());
+    ui->lineEdit_AutoResend->setText(
+                settings.value("sendoutAutoResendTime","1000").toString());
+    settings.endGroup();
 }
 
 /**
@@ -92,9 +151,11 @@ void MainWindow::slot_menu_file(QAction *select){
     else if(select == ui->action_saveRecnews){}
     else if(select == ui->action_setPreferences){}
 }
+
 void MainWindow::slot_menu_tools(QAction *select){}
 
 void MainWindow::slot_menu_setting(QAction *select){
+
     //Radio
     if(select == ui->action_styleDefault){
         ui->action_styleDefault->setChecked(true);
@@ -147,8 +208,8 @@ void MainWindow::Init(){
  * @brief MainWindow::on_pushButton_uartDisconnect_clicked
  * 断开串口连接 - 槽函数
  */
-void MainWindow::on_pushButton_uartDisconnect_clicked()
-{
+void MainWindow::on_pushButton_uartDisconnect_clicked(){
+
     if(s_connect == uart_state){
         mSerial->close();
         Init();
@@ -161,8 +222,8 @@ void MainWindow::on_pushButton_uartDisconnect_clicked()
  * @brief MainWindow::on_pushButton_uartConnect_clicked
  * 串口连接 - 槽函数
  */
-void MainWindow::on_pushButton_uartConnect_clicked()
-{
+void MainWindow::on_pushButton_uartConnect_clicked(){
+
     //获取串口参数并设置
     mSerial = new QSerialPort();
 
@@ -220,8 +281,8 @@ void MainWindow::on_pushButton_uartConnect_clicked()
  * @brief MainWindow::on_buttom_sendout_clicked
  * 串口数据发送 - 槽函数
  */
-void MainWindow::on_buttom_sendout_clicked()
-{
+void MainWindow::on_buttom_sendout_clicked(){
+
     if(uart_state != s_connect){
         setNewsColor(Qt::red);
         mlaybelNews->setText("SerialPort is't Connect.");
@@ -280,11 +341,9 @@ void MainWindow::slot_uartReadData(){
     else if(DISPLAYMODE_HEX == mBGdisplaymode->checkedId()){
 
         QString re = "";
-
         QByteArray bytearray = mSerial->readAll();
 
         //hex char[] 转QString
-
         for(int i = 0; i < bytearray.length(); i++){
             if((unsigned char)bytearray[i] > 255)
                 re.append("Error ");
@@ -314,8 +373,8 @@ void MainWindow::slot_uartError(QSerialPort::SerialPortError error){
  * @param checked
  * 定时重发功能 - 槽函数
  */
-void MainWindow::on_checkBox_sendoutAutoResend_clicked(bool checked)
-{
+void MainWindow::on_checkBox_sendoutAutoResend_clicked(bool checked){
+
     if(checked){
 
         if(s_connect == uart_state){
@@ -339,8 +398,8 @@ void MainWindow::on_checkBox_sendoutAutoResend_clicked(bool checked)
  * 更改定时重发时间 - 槽函数
  * 为支持开启定时重发状态更改定时时间
  */
-void MainWindow::on_lineEdit_AutoResend_textChanged(const QString &arg1)
-{
+void MainWindow::on_lineEdit_AutoResend_textChanged(const QString &arg1){
+
     if(ui->checkBox_sendoutAutoResend->isChecked()){
         if(mAutosendoutTimer->isActive()){
             mAutosendoutTimer->stop();
@@ -360,21 +419,19 @@ void MainWindow::setNewsColor(Qt::GlobalColor color){
     mlaybelNews->setPalette(pa);
 }
 
-void MainWindow::on_pushButton_clear_TBinput_clicked()
-{
+void MainWindow::on_pushButton_clear_TBinput_clicked(){
     ui->textBrowser_intput->clear();
 }
 
-void MainWindow::on_pushButton_clear_TBoutput_clicked()
-{
+void MainWindow::on_pushButton_clear_TBoutput_clicked(){
     ui->textEdit_output->clear();
 }
 
 /**
  * 以下用于开启串口后设置串口参数
  */
-void MainWindow::on_comBox_uartDps_currentTextChanged(const QString &arg1)
-{
+void MainWindow::on_comBox_uartDps_currentTextChanged(const QString &arg1){
+
     if(s_connect == uart_state){
 
         //自定义波特率
@@ -396,8 +453,8 @@ void MainWindow::on_comBox_uartDps_currentTextChanged(const QString &arg1)
 
 }
 
-void MainWindow::on_comBox_uartDataLen_currentIndexChanged(const QString &arg1)
-{
+void MainWindow::on_comBox_uartDataLen_currentIndexChanged(const QString &arg1){
+
     if(s_connect == uart_state){
 
         QSerialPort::DataBits mDataBits = (QSerialPort::DataBits)arg1.toInt();
@@ -413,8 +470,8 @@ void MainWindow::on_comBox_uartDataLen_currentIndexChanged(const QString &arg1)
     }
 }
 
-void MainWindow::on_comBox_uartCheckBit_currentIndexChanged(int index)
-{
+void MainWindow::on_comBox_uartCheckBit_currentIndexChanged(int index){
+
     if(s_connect == uart_state){
 
         QSerialPort::Parity mParity;
@@ -439,8 +496,8 @@ void MainWindow::on_comBox_uartCheckBit_currentIndexChanged(int index)
 
 
 
-void MainWindow::on_comBox_uartFlowControl_currentIndexChanged(int index)
-{
+void MainWindow::on_comBox_uartFlowControl_currentIndexChanged(int index){
+
     if(s_connect == uart_state){
 
         QSerialPort::FlowControl mFlowControl = (QSerialPort::FlowControl)index;
@@ -457,8 +514,8 @@ void MainWindow::on_comBox_uartFlowControl_currentIndexChanged(int index)
     }
 }
 
-void MainWindow::on_comBox_uartStopBit_currentIndexChanged(int index)
-{
+void MainWindow::on_comBox_uartStopBit_currentIndexChanged(int index){
+
     if(s_connect == uart_state){
 
          QSerialPort::StopBits mStopBits = (QSerialPort::StopBits)(index + 1);
@@ -475,8 +532,8 @@ void MainWindow::on_comBox_uartStopBit_currentIndexChanged(int index)
     }
 }
 
-void MainWindow::on_comBox_uartDps_currentIndexChanged(int index)
-{
+void MainWindow::on_comBox_uartDps_currentIndexChanged(int index){
+
     //自定义波特率
     if(8 == index){
         QLineEdit *lineEdit = new QLineEdit(this);
@@ -493,4 +550,8 @@ void MainWindow::on_comBox_uartDps_currentIndexChanged(int index)
     else{
         ui->comBox_uartDps->setEditable(false);
     }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event){
+    writeSettings();
 }

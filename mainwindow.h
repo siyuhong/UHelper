@@ -12,6 +12,9 @@
 #include <QString>
 #include <QMetaEnum>
 #include <QLabel>
+#include <QSettings>
+#include <QCloseEvent>
+#include <QMessageBox>
 
 #define DISPLAYMODE_ASCII 0
 #define DISPLAYMODE_HEX 1
@@ -45,6 +48,10 @@ private:
     void Init_UI();
     void setNewsColor(Qt::GlobalColor color);
 
+    //QSettings
+    void writeSettings();
+    void readSettings();
+
     Ui::MainWindow *ui;
 
     QSerialPort *mSerial;
@@ -76,6 +83,9 @@ private slots:
     void on_comBox_uartFlowControl_currentIndexChanged(int index);
     void on_comBox_uartStopBit_currentIndexChanged(int index);
     void on_comBox_uartDps_currentIndexChanged(int index);
+
+protected:
+    virtual void closeEvent(QCloseEvent* event)override;
 };
 
 //Dialog

@@ -1,8 +1,5 @@
 #include "mainwindow.h"
 
-#include "QSerialPortInfo"
-#include "QSerialPort"
-
 #include <QApplication>
 #include <QtWidgets/QLabel>
 

@@ -407,8 +407,6 @@
      <string>文件</string>
     </property>
     <addaction name="action_saveRecnews"/>
-    <addaction name="action_savePreferences"/>
-    <addaction name="action_setPreferences"/>
    </widget>
    <widget class="QMenu" name="menu_tools">
     <property name="title">
@@ -423,7 +421,6 @@
     </property>
     <addaction name="action_pushbug"/>
     <addaction name="separator"/>
-    <addaction name="action_aboutAuthor"/>
     <addaction name="action_aboutUHelper"/>
    </widget>
    <widget class="QMenu" name="menu_setting">
