@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QSerialPortInfo>
 #include <QSerialPort>
 #include <QDebug>

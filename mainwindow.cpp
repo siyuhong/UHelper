@@ -47,8 +47,11 @@ void MainWindow::readSettings(){
     QSettings settings("FSF","UHelper");
 
     settings.beginGroup("MainWindows");
-    resize(settings.value("size",QSize(400,400)).toSize());
-    move(settings.value("pos",QPoint(200,200)).toPoint());
+    resize(settings.value("size",QSize(
+                              (QApplication::desktop()->width() - width()) / 2,
+                              (QApplication::desktop()->height() - height()) / 2
+                              )).toSize());
+    move(settings.value("pos",QPoint(576,558)).toPoint());
     settings.endGroup();
 
     settings.beginGroup("DisplaySettings");
