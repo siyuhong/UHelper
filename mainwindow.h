@@ -56,6 +56,7 @@ private:
     void Init_UartPort();
     void Init_UartDps();
     void Init_UI();
+    void AddNewsBar();
     void setNewsColor(Qt::GlobalColor color);
 
     //QSettings

@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
 
      Init();
 
+     AddNewsBar();
+
      //读取用户偏好
      readSettings();
 
@@ -16,6 +18,15 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow(){
     delete ui;
+}
+
+void MainWindow::AddNewsBar(){
+
+    mlaybeNewsname = new QLabel;
+    mlaybeNewsname->setText("News:");
+    statusBar()->addWidget(mlaybeNewsname);
+    mlaybelNews = new QLabel;
+    statusBar()->addWidget(mlaybelNews);
 }
 
 void MainWindow::writeSettings(){
@@ -115,12 +126,6 @@ void MainWindow::Init_UI(){
 
     //仅能输入大于0的数字
     ui->lineEdit_AutoResend->setValidator(new QIntValidator(0, INT_MAX, this));
-
-    mlaybeNewsname = new QLabel;
-    mlaybeNewsname->setText("News:");
-    statusBar()->addWidget(mlaybeNewsname);
-    mlaybelNews = new QLabel;
-    statusBar()->addWidget(mlaybelNews);
 
     ui->comBox_uartDataLen->setCurrentIndex(3);
     ui->comBox_uartDps->setCurrentIndex(7);
