@@ -18,11 +18,19 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 
+#include <QFileDialog>
+#include <QFile>
+#include <QFileInfo>
+#include <QDir>
+
 #define DISPLAYMODE_ASCII 0
 #define DISPLAYMODE_HEX 1
 
 #define SENDOUTMODE_ASCII 0
 #define SENDOUTMODE_HEX 1
+
+#define DEFAULT_H 558
+#define DEFAULT_W 761
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

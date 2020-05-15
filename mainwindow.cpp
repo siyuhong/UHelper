@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 
      Init();
 
+     //读取用户偏好
      readSettings();
 
 }
@@ -51,7 +52,7 @@ void MainWindow::readSettings(){
                               (QApplication::desktop()->width() - width()) / 2,
                               (QApplication::desktop()->height() - height()) / 2
                               )).toSize());
-    move(settings.value("pos",QPoint(576,558)).toPoint());
+    move(settings.value("pos",QPoint(DEFAULT_W,DEFAULT_H)).toPoint());
     settings.endGroup();
 
     settings.beginGroup("DisplaySettings");
@@ -149,10 +150,43 @@ void MainWindow::Init_UI(){
 
 }
 
+/**
+ * @brief MainWindow::slot_menu_file
+ * @param select
+ * 保存接收框消息为txt文件
+ */
 void MainWindow::slot_menu_file(QAction *select){
-    if(select == ui->action_savePreferences){}
-    else if(select == ui->action_saveRecnews){}
-    else if(select == ui->action_setPreferences){}
+
+    if(select == ui->action_saveRecnews){
+
+        QString saveFile = "";
+        //获取保存路径及文件名
+        saveFile = QFileDialog::getSaveFileName(this,"保存","","文本文件(*.txt)");
+
+        QString filepath = QFileInfo(saveFile).absolutePath();
+        QString filename = QFileInfo(saveFile).fileName();
+
+        QDir mDir;
+        //保存当前路径
+        QString currentDir = mDir.currentPath();
+
+        QFile *tempFile = new QFile();
+        //设置保存路径
+        mDir.setCurrent(filepath);
+
+        tempFile->setFileName(filename);
+        if(tempFile->open(QIODevice::WriteOnly|QIODevice::Text)){
+            QString wStr = ui->textBrowser_intput->document()->toPlainText();
+            tempFile->write(wStr.toLocal8Bit().data(),wStr.length());
+            tempFile->close();
+            //news
+        }
+        else{
+            //news
+        }
+        //程序路径复原
+        mDir.setCurrent(currentDir);
+    }
 }
 
 void MainWindow::slot_menu_tools(QAction *select){}
@@ -456,6 +490,7 @@ void MainWindow::on_comBox_uartDps_currentTextChanged(const QString &arg1){
 
 }
 
+/**********************串口参数改动时触发的槽函数***************************************/
 void MainWindow::on_comBox_uartDataLen_currentIndexChanged(const QString &arg1){
 
     if(s_connect == uart_state){
@@ -535,6 +570,11 @@ void MainWindow::on_comBox_uartStopBit_currentIndexChanged(int index){
     }
 }
 
+/**
+ * @brief MainWindow::on_comBox_uartDps_currentIndexChanged
+ * @param index
+ * 主要实现自定义波特率
+ */
 void MainWindow::on_comBox_uartDps_currentIndexChanged(int index){
 
     //自定义波特率
@@ -556,5 +596,7 @@ void MainWindow::on_comBox_uartDps_currentIndexChanged(int index){
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){
+
+    //保存用户偏好
     writeSettings();
 }
