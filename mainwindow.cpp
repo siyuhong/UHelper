@@ -139,6 +139,10 @@ void MainWindow::Init_UI(){
     ui->buttom_sendout->setEnabled(false);
 
     ui->checkBox_displayNewline->setChecked(true);
+    ui->checkBox_displayTime->setChecked(false);
+    ui->checkBox_sendoutAutoResend->setChecked(false);
+
+    ui->textBrowser_intput->setReadOnly(true);
 
     connect(ui->menu_file,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_file(QAction*)));
     connect(ui->menu_tools,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_tools(QAction*)));
@@ -258,6 +262,9 @@ void MainWindow::Init(){
 void MainWindow::on_pushButton_uartDisconnect_clicked(){
 
     if(s_connect == uart_state){
+
+        mAutosendoutTimer->stop();
+
         mSerial->close();
         Init();
         setNewsColor(Qt::black);
@@ -398,6 +405,7 @@ void MainWindow::slot_uartReadData(){
         }
 
         ui->textBrowser_intput->insertPlainText(re);
+//        ui->textBrowser_intput->moveCursor(QTextCursor::End);
     }
 
 }
