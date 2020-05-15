@@ -175,15 +175,20 @@ void MainWindow::slot_menu_file(QAction *select){
         mDir.setCurrent(filepath);
 
         tempFile->setFileName(filename);
+
         if(tempFile->open(QIODevice::WriteOnly|QIODevice::Text)){
             QString wStr = ui->textBrowser_intput->document()->toPlainText();
             tempFile->write(wStr.toLocal8Bit().data(),wStr.length());
             tempFile->close();
-            //news
         }
         else{
-            //news
+            setNewsColor(Qt::red);
+            mlaybelNews->setText("Save File Error!");
         }
+
+        setNewsColor(Qt::black);
+        mlaybelNews->setText("Save File Success!");
+
         //程序路径复原
         mDir.setCurrent(currentDir);
     }
