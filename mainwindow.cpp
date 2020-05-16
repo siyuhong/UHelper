@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "ascii_table.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -154,7 +155,7 @@ void MainWindow::Init_UI(){
  */
 void MainWindow::slot_menu_file(QAction *select){
 
-    if(select == ui->action_saveRecnews){
+    if(ui->action_saveRecnews == select){
 
         QString saveFile = "";
         //获取保存路径及文件名
@@ -197,22 +198,30 @@ void MainWindow::slot_menu_file(QAction *select){
     }
 }
 
-void MainWindow::slot_menu_tools(QAction *select){}
+void MainWindow::slot_menu_tools(QAction *select){
+
+    if(ui->action_ASCII == select){
+
+        QWidget *mASCIItabDLg = new ASCII_Table;
+        mASCIItabDLg->setWindowTitle("ASCII Table");
+        mASCIItabDLg->show();
+    }
+}
 
 void MainWindow::slot_menu_setting(QAction *select){
 
     //Radio
-    if(select == ui->action_styleDefault){
+    if(ui->action_styleDefault == select){
         ui->action_styleDefault->setChecked(true);
         ui->action_styleDark->setChecked(false);
         ui->action_styleCustom->setChecked(false);
     }
-    if(select == ui->action_styleDark){
+    if(ui->action_styleDark == select){
         ui->action_styleDefault->setChecked(false);
         ui->action_styleDark->setChecked(true);
         ui->action_styleCustom->setChecked(false);
     }
-    if(select == ui->action_styleCustom){
+    if(ui->action_styleCustom == select){
         ui->action_styleDefault->setChecked(false);
         ui->action_styleDark->setChecked(false);
         ui->action_styleCustom->setChecked(true);

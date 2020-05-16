@@ -32,14 +32,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    mycombobox.cpp
+    mycombobox.cpp \
+    ascii_table.cpp
 
 HEADERS += \
     mainwindow.h \
-    mycombobox.h
+    mycombobox.h \
+    ascii_table.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    ascii_table.ui
 
 TRANSLATIONS += \
     UHelper_zh_CN.ts
