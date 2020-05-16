@@ -95,6 +95,8 @@ private slots:
     void on_comBox_uartStopBit_currentIndexChanged(int index);
     void on_comBox_uartDps_currentIndexChanged(int index);
 
+    void on_textBrowser_intput_cursorPositionChanged();
+
 protected:
     virtual void closeEvent(QCloseEvent* event)override;
 };

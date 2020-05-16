@@ -9,8 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
 
      Init();
 
-     AddNewsBar();
-
      //读取用户偏好
      readSettings();
 
@@ -18,15 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow(){
     delete ui;
-}
-
-void MainWindow::AddNewsBar(){
-
-    mlaybeNewsname = new QLabel;
-    mlaybeNewsname->setText("News:");
-    statusBar()->addWidget(mlaybeNewsname);
-    mlaybelNews = new QLabel;
-    statusBar()->addWidget(mlaybelNews);
 }
 
 void MainWindow::writeSettings(){
@@ -124,12 +113,13 @@ void MainWindow::Init_UartPort(){
 
 void MainWindow::Init_UI(){
 
+    ui->textBrowser_intput->clear();
+
     //仅能输入大于0的数字
     ui->lineEdit_AutoResend->setValidator(new QIntValidator(0, INT_MAX, this));
 
     ui->comBox_uartDataLen->setCurrentIndex(3);
     ui->comBox_uartDps->setCurrentIndex(7);
-    ui->textBrowser_intput->clear();
 
     ui->radioButton_displayASCII->setChecked(true);
     ui->radioButton_sendoutASCII->setChecked(true);
@@ -141,8 +131,6 @@ void MainWindow::Init_UI(){
     ui->checkBox_displayNewline->setChecked(true);
     ui->checkBox_displayTime->setChecked(false);
     ui->checkBox_sendoutAutoResend->setChecked(false);
-
-    ui->textBrowser_intput->setReadOnly(true);
 
     connect(ui->menu_file,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_file(QAction*)));
     connect(ui->menu_tools,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_tools(QAction*)));
@@ -187,7 +175,13 @@ void MainWindow::slot_menu_file(QAction *select){
 
         if(tempFile->open(QIODevice::WriteOnly|QIODevice::Text)){
             QString wStr = ui->textBrowser_intput->document()->toPlainText();
-            tempFile->write(wStr.toLocal8Bit().data(),wStr.length());
+
+            QTextStream streamFileOut(tempFile);
+            streamFileOut.setCodec("UTF-8");
+            streamFileOut << wStr;
+            streamFileOut.flush();
+
+            // tempFile->write(wStr.toLocal8Bit().data(),wStr.length());
             tempFile->close();
         }
         else{
@@ -249,6 +243,12 @@ void MainWindow::Init(){
     mBGsendoutmode->setId(ui->radioButton_sendoutASCII,SENDOUTMODE_ASCII);
     mBGsendoutmode->setId(ui->radioButton_sendoutHEX,SENDOUTMODE_HEX);
 
+    mlaybeNewsname = new QLabel;
+    mlaybeNewsname->setText("News:");
+    statusBar()->addWidget(mlaybeNewsname);
+    mlaybelNews = new QLabel;
+    statusBar()->addWidget(mlaybelNews);
+
     Init_UI();
 
     connect(ui->comBox_uartPort,SIGNAL(clicked()),this,SLOT(on_comBox_uartPort_clicked()));
@@ -264,9 +264,12 @@ void MainWindow::on_pushButton_uartDisconnect_clicked(){
     if(s_connect == uart_state){
 
         mAutosendoutTimer->stop();
-
         mSerial->close();
-        Init();
+
+        uart_state = s_disconnect;
+        ui->pushButton_uartConnect->setEnabled(true);
+        ui->pushButton_uartDisconnect->setEnabled(false);
+
         setNewsColor(Qt::black);
         mlaybelNews->setText("SerialPort Close Success!");
     }
@@ -405,7 +408,6 @@ void MainWindow::slot_uartReadData(){
         }
 
         ui->textBrowser_intput->insertPlainText(re);
-//        ui->textBrowser_intput->moveCursor(QTextCursor::End);
     }
 
 }
@@ -617,4 +619,14 @@ void MainWindow::closeEvent(QCloseEvent *event){
 
     //保存用户偏好
     writeSettings();
+}
+
+
+void MainWindow::on_textBrowser_intput_cursorPositionChanged()
+{
+    ////    QTextCursor cursor =  ui->textBrowser_intput->textCursor();
+    ////    cursor.movePosition(QTextCursor::End);
+    ////    ui->textBrowser_intput->setTextCursor(cursor);
+
+    ui->textBrowser_intput->moveCursor(QTextCursor::End);
 }
