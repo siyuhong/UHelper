@@ -23,8 +23,6 @@
 #include <QFileInfo>
 #include <QDir>
 
-#include <QStyleFactory>
-
 #define DISPLAYMODE_ASCII 0
 #define DISPLAYMODE_HEX 1
 
@@ -74,9 +72,6 @@ private:
     QLabel *mlaybeNewsname;
     QLabel *mlaybelNews;
     enum state { s_connect, s_disconnect} uart_state;
-
-    QPalette mDefaultPalette;
-    const char *mDefaultStyle;
 
 private slots:
     void on_comBox_uartPort_clicked();

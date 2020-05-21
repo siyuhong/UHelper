@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>ico_UHelper.ico</file>
+        <file>ico/ico_UHelper.ico</file>
+        <file>qss/dark.qss</file>
     </qresource>
 </RCC>

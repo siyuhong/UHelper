@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="widget">
       <attribute name="title">
@@ -25,7 +25,11 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QLineEdit" name="lineedit_findControlASCII"/>
+        <widget class="QLineEdit" name="lineedit_findControlASCII">
+         <property name="placeholderText">
+          <string>搜索</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QTableWidget" name="tab_controlASCII">
@@ -1061,7 +1065,11 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLineEdit" name="lineEdit_findDisplayASCII"/>
+        <widget class="QLineEdit" name="lineEdit_findDisplayASCII">
+         <property name="placeholderText">
+          <string>搜索</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QTableWidget" name="tab_displayASCII">

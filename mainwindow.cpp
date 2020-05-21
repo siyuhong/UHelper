@@ -206,67 +206,31 @@ void MainWindow::slot_menu_tools(QAction *select){
         mASCIItabDLg->setWindowTitle("ASCII Table");
         mASCIItabDLg->show();
     }else if(ui->action_baseConversion == select){
-        //略
+        //略,待添加
     }
 }
 
+/**
+ * @brief MainWindow::slot_menu_setting
+ * @param select
+ * 换肤功能实现
+ */
 void MainWindow::slot_menu_setting(QAction *select){
 
-    //Radio
-    if(ui->action_styleDefault == select){
-        ui->action_styleDefault->setChecked(true);
-        ui->action_styleDark->setChecked(false);
-        ui->action_styleWhite->setChecked(false);
-    }
-    else if(ui->action_styleDark == select){
-        ui->action_styleDefault->setChecked(false);
-        ui->action_styleDark->setChecked(true);
-        ui->action_styleWhite->setChecked(false);
-    }
-    else if(ui->action_styleWhite == select){
-        ui->action_styleDefault->setChecked(false);
-        ui->action_styleDark->setChecked(false);
-        ui->action_styleWhite->setChecked(true);
-    }
+    if(ui->action_styleDark == select){
+        if(ui->action_styleDark->isChecked()){
 
-    if(ui->action_styleDefault == select){
+            QFile qss(":/qss/dark.qss");
+            qss.open(QFile::ReadOnly);
+            qApp->setStyleSheet(qss.readAll());
+            qss.close();
 
-        qApp->setPalette(mDefaultPalette);
-        qApp->setStyle(QStyleFactory::create(mDefaultStyle));
-        qApp->setPalette(QApplication::style()->standardPalette());
-
-    }
-    else if(ui->action_styleDark == select){
-
-        qApp->setStyle(QStyleFactory::create("Fusion"));
-        qApp->setPalette(QApplication::style()->standardPalette());
-
-        QPalette palette;
-        palette.setColor(QPalette::Window, QColor(120,120,120));
-        palette.setColor(QPalette::WindowText, Qt::white);
-        palette.setColor(QPalette::Base, QColor(53,53,53));
-        palette.setColor(QPalette::AlternateBase, QColor(53,53,53));
-        palette.setColor(QPalette::ToolTipBase, Qt::white);
-        palette.setColor(QPalette::ToolTipText, Qt::white);
-        palette.setColor(QPalette::Text, Qt::white);
-//        palette.setColor(QPalette::Button, QColor(53,53,53));
-//        palette.setColor(QPalette::ButtonText, Qt::white);
-        palette.setColor(QPalette::BrightText, Qt::red);
-        palette.setColor(QPalette::Highlight, QColor(142,45,197).lighter());
-        palette.setColor(QPalette::HighlightedText, Qt::black);
-        qApp->setPalette(palette);
-
-    }
-    else if(ui->action_styleWhite == select){
-
-        qApp->setStyle(QStyleFactory::create("Fusion"));
-        qApp->setPalette(QApplication::style()->standardPalette());
-
-        QPalette palette;
-        palette.setColor(QPalette::Window, QColor(255,255,255));
-        palette.setColor(QPalette::WindowText, Qt::black);
-        palette.setColor(QPalette::Base, QColor(240,255,255));
-        qApp->setPalette(palette);
+            ui->action_styleDark->setChecked(true);
+        }
+        else{
+            ui->action_styleDark->setChecked(false);
+            qApp->setStyleSheet("");
+        }
     }
 
 }
@@ -278,10 +242,6 @@ void MainWindow::slot_menu_help(QAction *select){}
  * 变量+UI初始化
  */
 void MainWindow::Init(){
-
-    //默认调色板
-    mDefaultPalette = qApp->palette();
-    mDefaultStyle = QApplication::style()->metaObject()->className();
 
     uart_state = s_disconnect;
     mAutosendoutTimer = new QTimer(this);
@@ -527,9 +487,9 @@ void MainWindow::on_lineEdit_AutoResend_textChanged(const QString &arg1){
  * 设置News提醒颜色
  */
 void MainWindow::setNewsColor(Qt::GlobalColor color){
-//    QPalette pa;
-//    pa.setColor(QPalette::WindowText,color);
-//    mlaybelNews->setPalette(pa);
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,color);
+    mlaybelNews->setPalette(pa);
 }
 
 void MainWindow::on_pushButton_clear_TBinput_clicked(){

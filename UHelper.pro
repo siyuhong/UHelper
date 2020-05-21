@@ -6,7 +6,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 # 版本信息
 VERSION = 1.0.0.0
 # 图标
-RC_ICONS = ico_UHelper.ico
+RC_ICONS = "ico/ico_UHelper.ico"
 # 产品名称
 QMAKE_TARGET_PRODUCT = "UHelper"
 # 文件说明

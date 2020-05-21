@@ -26,7 +26,7 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="res.qrc">
+   <iconset>
     <normaloff>:/ico_UHelper.ico</normaloff>:/ico_UHelper.ico</iconset>
   </property>
   <widget class="QWidget" name="UHelperwidget">
@@ -446,9 +446,7 @@ p, li { white-space: pre-wrap; }
      <property name="title">
       <string>界面风格</string>
      </property>
-     <addaction name="action_styleDefault"/>
      <addaction name="action_styleDark"/>
-     <addaction name="action_styleWhite"/>
     </widget>
     <addaction name="menu_setStyle"/>
     <addaction name="action_setFont"/>
@@ -563,8 +561,6 @@ p, li { white-space: pre-wrap; }
   <tabstop>pushButton_clear_TBoutput</tabstop>
   <tabstop>textBrowser_intput</tabstop>
  </tabstops>
- <resources>
-  <include location="res.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
