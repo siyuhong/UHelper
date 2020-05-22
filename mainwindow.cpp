@@ -1,8 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "ascii_table.h"
-#include <QDesktopServices>
-#include <QFontDialog>
+#include "baseconversion.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -230,7 +229,9 @@ void MainWindow::slot_menu_tools(QAction *select){
         mASCIItabDLg->setWindowTitle("ASCII Table");
         mASCIItabDLg->show();
     }else if(ui->action_baseConversion == select){
-        //略,待添加
+        QWidget *mBaseConversionDLg = new BaseConversion;
+        mBaseConversionDLg->setWindowTitle("Base Conversion");
+        mBaseConversionDLg->show();
     }
 }
 

@@ -33,16 +33,19 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     mycombobox.cpp \
-    ascii_table.cpp
+    ascii_table.cpp \
+    baseconversion.cpp
 
 HEADERS += \
     mainwindow.h \
     mycombobox.h \
-    ascii_table.h
+    ascii_table.h \
+    baseconversion.h
 
 FORMS += \
     mainwindow.ui \
-    ascii_table.ui
+    ascii_table.ui \
+    baseconversion.ui
 
 TRANSLATIONS += \
     UHelper_zh_CN.ts

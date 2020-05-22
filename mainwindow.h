@@ -19,6 +19,9 @@
 #include <QMessageBox>
 #include <QSize>
 
+#include <QDesktopServices>
+#include <QFontDialog>
+
 #include <QFileDialog>
 #include <QFile>
 #include <QFileInfo>
