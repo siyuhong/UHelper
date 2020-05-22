@@ -2,5 +2,14 @@
     <qresource prefix="/">
         <file>ico/ico_UHelper.ico</file>
         <file>qss/dark.qss</file>
+        <file>image/new.svg</file>
+        <file>image/export.svg</file>
+        <file>image/exit.svg</file>
+        <file>image/asciitable.svg</file>
+        <file>image/convert.svg</file>
+        <file>image/skin.svg</file>
+        <file>image/typeface.svg</file>
+        <file>image/bug.svg</file>
+        <file>image/about.svg</file>
     </qresource>
 </RCC>

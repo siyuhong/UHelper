@@ -418,10 +418,18 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
+    <property name="tearOffEnabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>文件</string>
     </property>
+    <property name="toolTipsVisible">
+     <bool>false</bool>
+    </property>
+    <addaction name="action_new"/>
     <addaction name="action_saveRecnews"/>
+    <addaction name="action_exit"/>
    </widget>
    <widget class="QMenu" name="menu_tools">
     <property name="title">
@@ -435,7 +443,6 @@ p, li { white-space: pre-wrap; }
      <string>帮助</string>
     </property>
     <addaction name="action_pushbug"/>
-    <addaction name="separator"/>
     <addaction name="action_aboutUHelper"/>
    </widget>
    <widget class="QMenu" name="menu_setting">
@@ -445,6 +452,10 @@ p, li { white-space: pre-wrap; }
     <widget class="QMenu" name="menu_setStyle">
      <property name="title">
       <string>界面风格</string>
+     </property>
+     <property name="icon">
+      <iconset resource="res.qrc">
+       <normaloff>:/image/skin.svg</normaloff>:/image/skin.svg</iconset>
      </property>
      <addaction name="action_styleDark"/>
     </widget>
@@ -457,8 +468,12 @@ p, li { white-space: pre-wrap; }
    <addaction name="menu_help"/>
   </widget>
   <action name="action_saveRecnews">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/export.svg</normaloff>:/image/export.svg</iconset>
+   </property>
    <property name="text">
-    <string>保存消息</string>
+    <string>导出.txt</string>
    </property>
   </action>
   <action name="action_savePreferences">
@@ -472,16 +487,28 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="action_ASCII">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/asciitable.svg</normaloff>:/image/asciitable.svg</iconset>
+   </property>
    <property name="text">
     <string>ASCII</string>
    </property>
   </action>
   <action name="action_baseConversion">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/convert.svg</normaloff>:/image/convert.svg</iconset>
+   </property>
    <property name="text">
     <string>进制转换</string>
    </property>
   </action>
   <action name="action_aboutUHelper">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/about.svg</normaloff>:/image/about.svg</iconset>
+   </property>
    <property name="text">
     <string>关于UHelper</string>
    </property>
@@ -492,11 +519,19 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="action_pushbug">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/bug.svg</normaloff>:/image/bug.svg</iconset>
+   </property>
    <property name="text">
     <string>bug反馈</string>
    </property>
   </action>
   <action name="action_setFont">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/typeface.svg</normaloff>:/image/typeface.svg</iconset>
+   </property>
    <property name="text">
     <string>字体</string>
    </property>
@@ -531,6 +566,32 @@ p, li { white-space: pre-wrap; }
     <string>白色靓丽</string>
    </property>
   </action>
+  <action name="action_new">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/new.svg</normaloff>:/image/new.svg</iconset>
+   </property>
+   <property name="text">
+    <string>新建</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>打开</string>
+   </property>
+  </action>
+  <action name="action_exit">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/exit.svg</normaloff>:/image/exit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -561,6 +622,8 @@ p, li { white-space: pre-wrap; }
   <tabstop>pushButton_clear_TBoutput</tabstop>
   <tabstop>textBrowser_intput</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>
