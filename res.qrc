@@ -11,5 +11,6 @@
         <file>image/typeface.svg</file>
         <file>image/bug.svg</file>
         <file>image/about.svg</file>
+        <file>image/aboutqt.ico</file>
     </qresource>
 </RCC>
