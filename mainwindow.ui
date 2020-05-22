@@ -567,7 +567,7 @@ p, li { white-space: pre-wrap; }
     <string>白色靓丽</string>
    </property>
   </action>
-  <action name="action_new">
+  <action name="action_2">
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/image/new.svg</normaloff>:/image/new.svg</iconset>
@@ -579,9 +579,13 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
   </action>
-  <action name="action_2">
+  <action name="action_new">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/new.svg</normaloff>:/image/new.svg</iconset>
+   </property>
    <property name="text">
-    <string>打开</string>
+    <string>新建</string>
    </property>
   </action>
   <action name="action_exit">

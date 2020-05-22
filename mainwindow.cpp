@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "ascii_table.h"
 #include <QDesktopServices>
+#include <QFontDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -136,8 +137,7 @@ void MainWindow::Init_UI(){
 
     connect(ui->menu_file,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_file(QAction*)));
     connect(ui->menu_tools,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_tools(QAction*)));
-//    connect(ui->menu_setting,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_setting(QAction*)));
-    connect(ui->menu_setStyle,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_setting(QAction*)));
+    connect(ui->menu_setting,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_setting(QAction*)));
     connect(ui->menu_help,SIGNAL(triggered(QAction*)),this,SLOT(slot_menu_help(QAction*)));;
 
     //set action Shortcut
@@ -237,7 +237,7 @@ void MainWindow::slot_menu_tools(QAction *select){
 /**
  * @brief MainWindow::slot_menu_setting
  * @param select
- * 换肤功能实现
+ * 设置：换肤功能 + 字体
  */
 void MainWindow::slot_menu_setting(QAction *select){
 
@@ -254,6 +254,14 @@ void MainWindow::slot_menu_setting(QAction *select){
         else{
             ui->action_styleDark->setChecked(false);
             qApp->setStyleSheet("");
+        }
+    }
+    if(ui->action_setFont == select){
+        qDebug() << "OKKKKKKKKK!";
+        bool ok;
+        QFont font = QFontDialog::getFont(&ok,this);
+        if(ok){
+            qApp->setFont(font);
         }
     }
 
