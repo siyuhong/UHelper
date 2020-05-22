@@ -151,11 +151,30 @@ void MainWindow::Init_UI(){
 /**
  * @brief MainWindow::slot_menu_file
  * @param select
- * 保存接收框消息为txt文件
+ * 文件菜单｛新建，导出txt，退出｝
  */
 void MainWindow::slot_menu_file(QAction *select){
 
-    if(ui->action_saveRecnews == select){
+    //新建
+    if(ui->action_new == select){
+
+        if(s_connect == uart_state){
+
+            mAutosendoutTimer->stop();
+            mSerial->close();
+
+            uart_state = s_disconnect;
+            ui->pushButton_uartConnect->setEnabled(true);
+            ui->pushButton_uartDisconnect->setEnabled(false);
+
+        }
+
+        ui->textBrowser_intput->clear();
+        ui->textEdit_output->clear();
+        mlaybelNews->setText("");
+
+    }
+    else if(ui->action_saveRecnews == select){
 
         QString saveFile = "";
         //获取保存路径及文件名
@@ -195,6 +214,10 @@ void MainWindow::slot_menu_file(QAction *select){
 
         //程序路径复原
         mDir.setCurrent(currentDir);
+    }
+    //退出
+    else if(ui->action_exit == select){
+        qApp->quit();
     }
 }
 
