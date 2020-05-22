@@ -17,6 +17,7 @@
 #include <QSettings>
 #include <QCloseEvent>
 #include <QMessageBox>
+#include <QSize>
 
 #include <QFileDialog>
 #include <QFile>

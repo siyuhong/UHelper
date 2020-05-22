@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "ascii_table.h"
+#include <QDesktopServices>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -258,7 +259,30 @@ void MainWindow::slot_menu_setting(QAction *select){
 
 }
 
-void MainWindow::slot_menu_help(QAction *select){}
+void MainWindow::slot_menu_help(QAction *select){
+    if(ui->action_pushbug == select){
+        QDesktopServices::openUrl(QUrl(
+                          QLatin1String("https://github.com/siyuhong/UHelper/issues")));
+    }
+    if(ui->action_aboutUHelper == select){
+
+        QString msg = "<a><h2>UHelper</h2></a> <br>"
+                      "<a>Version:1.0.0</a> <br><br>"
+                      "<a>Src:  </a> <a href = www.github.com/siyuhong/UHelper >GayHub_UHelper</a> <br>"
+                      "<a>Blog:  </a> <a href = https://blog.csdn.net/weixin_40774605 > CSDN </a><br>"
+                      "<a>Email: 1097201863@qq.com </a> <br><br>"
+                      "<a>Copyright (C) 2020 JYU_hsy.</a> <br>"
+                      "<a>This program is free software: you can redistribute it "
+                      "and modify it under the terms of the GNU General Public License "
+                      "as published by the Free Software Foundation, either version 3 of the License, or any later version.</a><br>";
+        QMessageBox message(QMessageBox::NoIcon, "About", msg);
+        message.setIconPixmap(QPixmap(":/ico/ico_UHelper.ico").scaled(QSize(100,100)));
+        message.exec();
+    }
+    if(ui->action_Qt == select){
+        QMessageBox::aboutQt(this,"AboutQt");
+    }
+}
 
 /**
  * @brief MainWindow::Init
@@ -655,7 +679,6 @@ void MainWindow::on_comBox_uartDps_currentIndexChanged(int index){
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){
-
     //保存用户偏好
     writeSettings();
 }
