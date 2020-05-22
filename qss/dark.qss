@@ -84,12 +84,11 @@ QRadioButton::indicator
     width: 21px;
     height: 21px;
 }
-
+/*
 QRadioButton::indicator:unchecked
 {
     color: #76797C;
 }
-
 
 QRadioButton::indicator:unchecked:hover,
 QRadioButton::indicator:unchecked:focus,
@@ -117,7 +116,7 @@ QRadioButton::indicator:checked:disabled
 {
     outline: none;
 }
-
+*/
 
 QMenuBar
 {
