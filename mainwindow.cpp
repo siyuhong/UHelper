@@ -482,6 +482,8 @@ void MainWindow::slot_uartReadData(){
         ui->textBrowser_intput->insertPlainText(re);
     }
 
+    ui->textBrowser_intput->moveCursor(QTextCursor::End);
+
 }
 
 /**
@@ -699,5 +701,5 @@ void MainWindow::on_textBrowser_intput_cursorPositionChanged()
     ////    cursor.movePosition(QTextCursor::End);
     ////    ui->textBrowser_intput->setTextCursor(cursor);
 
-    ui->textBrowser_intput->moveCursor(QTextCursor::End);
+//    ui->textBrowser_intput->moveCursor(QTextCursor::End);
 }
