@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
-    <height>522</height>
+    <width>596</width>
+    <height>561</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -36,9 +36,9 @@
      <height>0</height>
     </size>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <layout class="QGridLayout" name="gridLayout_4" columnstretch="2,0">
+     <layout class="QGridLayout" name="gridLayout_4" columnstretch="1,4">
       <item row="0" column="0">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -336,6 +336,19 @@
           </layout>
          </widget>
         </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>4</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="0" column="1">
@@ -410,19 +423,6 @@ p, li { white-space: pre-wrap; }
       </item>
      </layout>
     </item>
-    <item>
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>4</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -431,8 +431,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>560</width>
-     <height>23</height>
+     <width>596</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_file">
@@ -622,6 +622,21 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>关于Qt</string>
+   </property>
+  </action>
+  <action name="action12">
+   <property name="text">
+    <string>12</string>
+   </property>
+  </action>
+  <action name="action13">
+   <property name="text">
+    <string>13</string>
+   </property>
+  </action>
+  <action name="action14">
+   <property name="text">
+    <string>14</string>
    </property>
   </action>
  </widget>

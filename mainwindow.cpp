@@ -472,7 +472,7 @@ void MainWindow::slot_uartReadData(){
         QString re = "";
         QByteArray bytearray = mSerial->readAll();
 
-        //hex char[] 转QString
+        //hex char[] 转 QString
         for(int i = 0; i < bytearray.length(); i++){
             if((unsigned char)bytearray[i] > 255)
                 re.append("Error ");
